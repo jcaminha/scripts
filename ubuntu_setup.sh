@@ -17,7 +17,7 @@ sudo apt update -y
 
 ## Substituindo snap por .deb ##
 snap remove gnome-calculator gnome-characters gnome-logs 
-sudo apt install gnome-calculator gnome-characters gnome-logs -y
+sudo apt install curl gnome-calculator gnome-characters gnome-logs -y
 
 ## Download e instalaçao de programas externos ##
 mkdir "$DIRETORIO_DOWNLOADS"
@@ -26,21 +26,18 @@ wget -c "$URL_SKYPE"		   -P "$DIRETORIO_DOWNLOADS"
 # ----------------------------- EXECUÇÃO ----------------------------- #
 
 ## Instalando codecs ##
-sudo apt install ubuntu-restricted-extras -y
-sudo apt install ttf-mscorefonts-installer -y
+sudo apt install ubuntu-restricted-extras ttf-mscorefonts-installer -y
+
+## Instalando pacotes e programas do repositório deb do Ubuntu  ##
+sudo apt install python3 python3-pip nautilus-dropbox flatpak gnome-software-plugin-flatpak gnome-sushi gnome-tweaks gnome-maps gnome-weather chrome-gnome-shell htop neofetch conky vim gufw darktable krita shotwell vlc owncloud-client gimp transmission deja-dup virtualbox flameshot net-tools git -y
+
+sudo apt install calibre thunderbird thunderbird-locale-pt-br thunderbird-gnome-support simple-scan -y
 
 ## Instalando pacotes .deb baixados na sessão anterior ##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
 
-## Instalando pacotes e programas do repositório deb do Ubuntu  ##
-sudo apt install python3 python-pip nautilus-dropbox flatpak gnome-software-plugin-flatpak gnome-sushi gnome-tweaks gnome-weather chrome-gnome-shell htop neofetch conky vim gufw darktable krita shotwell vlc owncloud-client thunderbird thunderbird-locale-pt-br thunderbird-gnome-support gimp transmission deja-dup virtualbox flameshot net-tools -y
-
 ## Adicionando repositório Flathub ##
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-## Instalando pacotes Snap ##
-#sudo snap install spotify &&
-#sudo snap install wps-office-multilang && 
 
 ## Libre Office##
 sudo apt install libreoffice-base-core libreoffice-calc libreoffice-draw libreoffice-impress libreoffice-writer libreoffice-l10n-pt-br  libreoffice-help-pt-br hyphen-pt-br libreoffice-gnome -y
@@ -48,25 +45,26 @@ sudo apt install libreoffice-base-core libreoffice-calc libreoffice-draw libreof
 ##Instalando pacotes Flatpak ##
 #sudo flatpak install flathub com.obsproject.Studio -y &&
 #sudo flatpak install flathub com.sublimetext.three -y &&
-sudo flatpak install flathub fondo -y
+#sudo flatpak install flathub fondo -y
+
+## Instalando pacotes Snap ##
+#sudo snap install spotify &&
+#sudo snap install wps-office-multilang &&
+sudo snap install code --classic
+sudo snap install spotify
 
 ##Instalar gnome extensions ##
 # Sound Input & Output Device Chooser
 # OpenWeather
 # Removable Drive Menu
+# WindowOverlay Icons
 
 # ---------------------------------------------------------------------- #
 ##Instalar Conky ##
 sudo rm /etc/conky/conky.conf 
 sudo cp conky* /etc/conky/conky.conf
 
----------------------------------------------------------------------- #
-##Instalar Spotiy ##
-sudo curl -sS https://download.spotify.com/debian/pubkey.gpg
-sudo apt-key add - 
-sudo echo "deb http://repository.spotify.com stable non-free" 
-sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update && sudo apt-get install spotify-client
+---------------------------------------------------------------------- 
 
 # ----------------------------- PÓS-INSTALAÇÃO ----------------------------- #
 ## Finalização, atualização e limpeza##
@@ -75,5 +73,8 @@ flatpak update
 sudo apt autoclean
 sudo apt autoremove -y
 rm -R "$DIRETORIO_DOWNLOADS"
-reboot
+echo "----------------------------------------"
+echo "Instalacao Concluida - por favor reboot."
+echo "----------------------------------------"
+#reboot
 # ---------------------------------------------------------------------- #
